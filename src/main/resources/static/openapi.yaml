@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title: DormSupport Public API
+  version: 0.1.0
+  description: Public MVP API exposed through the Gateway.
+servers:
+  - url: http://localhost:8080
+paths:
+  /health:
+    get:
+      summary: Gateway health
+      responses:
+        '200': { description: Gateway is available }
+  /api/v1/auth/register:
+    post:
+      summary: Register a resident
+      responses: { '201': { description: Resident registered } }
+  /api/v1/auth/login:
+    post:
+      summary: Login
+      responses: { '200': { description: Session created } }
+  /api/v1/auth/me:
+    get:
+      summary: Current user
+      responses: { '200': { description: User profile } }
+  /api/v1/categories:
+    get:
+      summary: List issue categories
+      responses: { '200': { description: Categories } }
+  /api/v1/issues:
+    get:
+      summary: List issues
+      responses: { '200': { description: Issues } }
+    post:
+      summary: Create issue
+      responses: { '201': { description: Issue created } }
+  /api/v1/issues/{issueId}:
+    get:
+      summary: Get issue
+      parameters:
+        - { name: issueId, in: path, required: true, schema: { type: integer, format: int64 } }
+      responses: { '200': { description: Issue details } }
+  /api/v1/issues/{issueId}/status:
+    patch:
+      summary: Change issue status
+      parameters:
+        - { name: issueId, in: path, required: true, schema: { type: integer, format: int64 } }
+      responses: { '200': { description: Status changed } }
