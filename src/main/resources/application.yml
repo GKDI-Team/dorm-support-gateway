@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: gateway-service
+
+services:
+  auth-uri: ${AUTH_SERVICE_URI:http://auth-service:8080}
+  issues-uri: ${ISSUES_SERVICE_URI:http://issues-service:8080}
+  notifications-uri: ${NOTIFICATIONS_SERVICE_URI:http://notifications-service:8080}
+  frontend-uri: ${FRONTEND_URI:http://frontend:80}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    url: /openapi.yaml
