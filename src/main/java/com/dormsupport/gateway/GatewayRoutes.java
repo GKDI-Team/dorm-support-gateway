@@ -26,7 +26,7 @@ public class GatewayRoutes {
                 .route("notifications-service", r -> r.path("/api/v1/notifications/**")
                         .filters(f -> f.rewritePath("/api/v1/notifications/(?<segment>.*)", "/${segment}"))
                         .uri(notificationsUri))
-                .route("frontend", r -> r.path("/", "/index.html").uri(frontendUri))
+                .route("frontend", r -> r.path("/", "/index.html", "/assets/**").uri(frontendUri))
                 .build();
     }
 }
