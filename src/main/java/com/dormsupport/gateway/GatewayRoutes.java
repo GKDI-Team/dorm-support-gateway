@@ -22,6 +22,7 @@ public class GatewayRoutes {
                 .route("admin-auth-service", r -> r.path("/api/v1/admin/**")
                         .filters(f -> f.rewritePath("/api/v1/admin/(?<segment>.*)", "/admin/${segment}"))
                         .uri(authUri))
+                .route("issue-categories", r -> r.path("/api/v1/categories/**").uri(issuesUri))
                 .route("issues-service", r -> r.path("/api/v1/issues/**").uri(issuesUri))
                 .route("notifications-service", r -> r.path("/api/v1/notifications/**")
                         .filters(f -> f.rewritePath("/api/v1/notifications/(?<segment>.*)", "/${segment}"))
