@@ -15,19 +15,21 @@ paths:
     post:
       summary: Create a user account
       security:
-        - SessionId: []
+        - BearerAuth: []
       responses:
         '201': { description: User account created }
-        '401': { description: Missing or invalid session }
+        '401': { description: Missing, invalid or expired JWT }
         '403': { description: Administrator role required }
         '409': { description: Login already exists }
   /api/v1/auth/login:
     post:
       summary: Login
-      responses: { '200': { description: Session created } }
+      responses: { '200': { description: JWT access token created } }
   /api/v1/auth/me:
     get:
       summary: Current user
+      security:
+        - BearerAuth: []
       responses: { '200': { description: User profile } }
   /api/v1/categories:
     get:
@@ -54,7 +56,7 @@ paths:
       responses: { '200': { description: Status changed } }
 components:
   securitySchemes:
-    SessionId:
-      type: apiKey
-      in: header
-      name: X-Session-Id
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
