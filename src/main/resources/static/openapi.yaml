@@ -46,13 +46,13 @@ paths:
     get:
       summary: Get issue
       parameters:
-        - { name: issueId, in: path, required: true, schema: { type: integer, format: int64 } }
+        - { name: issueId, in: path, required: true, schema: { type: string, format: uuid } }
       responses: { '200': { description: Issue details } }
   /api/v1/issues/{issueId}/status:
     patch:
       summary: Change issue status
       parameters:
-        - { name: issueId, in: path, required: true, schema: { type: integer, format: int64 } }
+        - { name: issueId, in: path, required: true, schema: { type: string, format: uuid } }
       responses: { '200': { description: Status changed } }
 components:
   securitySchemes:
