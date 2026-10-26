@@ -38,22 +38,38 @@ paths:
   /api/v1/issues:
     get:
       summary: List issues
-      responses: { '200': { description: Issues } }
+      security: [{ BearerAuth: [] }]
+      responses:
+        '200': { description: Issues }
+        '401': { description: Missing, invalid or expired JWT }
     post:
       summary: Create issue
-      responses: { '201': { description: Issue created } }
+      security: [{ BearerAuth: [] }]
+      responses:
+        '201': { description: Issue created }
+        '401': { description: Missing, invalid or expired JWT }
+        '403': { description: Resident role required }
   /api/v1/issues/{issueId}:
     get:
       summary: Get issue
+      security: [{ BearerAuth: [] }]
       parameters:
         - { name: issueId, in: path, required: true, schema: { type: string, format: uuid } }
-      responses: { '200': { description: Issue details } }
+      responses:
+        '200': { description: Issue details }
+        '401': { description: Missing, invalid or expired JWT }
+        '404': { description: Issue not found }
   /api/v1/issues/{issueId}/status:
     patch:
       summary: Change issue status
+      security: [{ BearerAuth: [] }]
       parameters:
         - { name: issueId, in: path, required: true, schema: { type: string, format: uuid } }
-      responses: { '200': { description: Status changed } }
+      responses:
+        '200': { description: Status changed }
+        '401': { description: Missing, invalid or expired JWT }
+        '403': { description: Reviewer or administrator role required }
+        '404': { description: Issue not found }
 components:
   securitySchemes:
     BearerAuth:
